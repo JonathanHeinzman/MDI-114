@@ -13,7 +13,7 @@ struct NewGroupView: View {
     @State private var groupName = ""
     @State private var selectedIcon = "list.bullet"
     var onSave: (TaskGroup) -> Void
-    let icons = ["list.bullet", "heart.fill", "book.fill", "house.fill", "star.fill", "cart.fill", "figure.fishing"]
+    let icons = ["list.bullet", "heart.fill", "book.fill", "person.fill", "house.fill", "star.fill", "cart.fill", "figure.fishing", ]
     
     var body: some View {
         NavigationStack {
