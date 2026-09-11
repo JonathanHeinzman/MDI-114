@@ -39,7 +39,7 @@ struct ContentView: View {
                 }
             }
             Divider()
-                .background( isDarkMode ? .white : .gray)
+                .overlay( isDarkMode ? .white : .gray)
                 .padding(.bottom, 20)
             Button{
                 isDarkMode.toggle()

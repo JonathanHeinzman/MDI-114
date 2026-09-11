@@ -20,6 +20,7 @@ struct TaskGroup: Identifiable, Hashable, Codable {
     var title: String
     var symbolName: String
     var tasks: [TaskItem]
+    var drawingData: Data?
 }
 
 // Mock Data / Fake Data to test our project

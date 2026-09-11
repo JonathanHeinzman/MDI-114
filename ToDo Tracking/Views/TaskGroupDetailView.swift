@@ -11,6 +11,7 @@ struct TaskGroupDetailView: View {
     
     @Binding var group: TaskGroup
     @Environment(\.horizontalSizeClass) var sizeClass
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         List {
@@ -42,9 +43,26 @@ struct TaskGroupDetailView: View {
         }
         .navigationTitle(group.title)
         .toolbar {
-            Button("Add Task") {
-                withAnimation {
-                    group.tasks.append(TaskItem(title: ""))
+            
+            HStack(spacing: 12) {
+                
+                NavigationLink {
+                    NotesView(group: $group)
+                } label: {
+                    HStack(spacing: 5) {
+                        Image(systemName: "pencil.line")
+                        Text("Notes")
+                    }
+                }
+                
+                Divider()
+                    .frame(height: 18)
+                    .overlay(colorScheme == .dark ? Color.white : Color.gray)
+                
+                Button("Add Task") {
+                    withAnimation {
+                        group.tasks.append(TaskItem(title: ""))
+                    }
                 }
             }
         }
