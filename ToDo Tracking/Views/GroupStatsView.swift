@@ -35,7 +35,7 @@ struct GroupStatsView: View {
                     .foregroundColor(.green)
                     .rotationEffect(.degrees(-90))
                 
-                Text("\(Int(progress * 100))%")
+                Text(progress, format: .percent)
                     .font(.caption)
                     .bold()
             }

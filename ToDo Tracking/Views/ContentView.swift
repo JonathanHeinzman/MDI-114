@@ -13,31 +13,45 @@ struct ContentView: View {
     @State private var selectedGroup: TaskGroup? // optional value
     @State private var columnVisibility: NavigationSplitViewVisibility = .all // navigation side panel
     @State private var isShowingAddGroup = false
-    
     @AppStorage("isDarkMode") private var isDarkMode = false
-    
     @Environment(\.scenePhase) private var scenePhase
     let saveKey = "SavedTaskGroups"
+    @Environment(\.dismiss) private var dismiss
+    @Binding var profile: Profile
     
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             // COLUMN 1: SIDEBAR
             List(selection: $selectedGroup) {
-                ForEach(taskGroups) { group in
+                ForEach(profile.groups) { group in
                     NavigationLink(value: group) {
                         Label(group.title, systemImage: group.symbolName)
                     }
                 }
             }
-            .navigationTitle("To Do Tracking")
+            .navigationTitle(profile.name)
             .listStyle(.sidebar)
             .toolbar {
-                Button{
-                    isShowingAddGroup = true
-                } label: {
-                    Image(systemName: "plus")
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundColor(.blue)
+                            .padding(8)
+                            .background(Circle().fill(Color.indigo.opacity(0.2)))
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button{
+                        isShowingAddGroup = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
                 }
             }
+            
             Divider()
                 .overlay( isDarkMode ? .white : .gray)
                 .padding(.bottom, 20)
@@ -57,16 +71,19 @@ struct ContentView: View {
         detail: {
             if let group = selectedGroup {
                 // find the index of the selected group
-                if let index = taskGroups.firstIndex(where: { $0.id == group.id }) {
-                    TaskGroupDetailView(group: $taskGroups[index])
+                if let index = profile.groups.firstIndex(where: { $0.id == group.id }) {
+                    TaskGroupDetailView(group: $profile.groups[index])
                 }
             } else {
                 ContentUnavailableView("Select a Group", systemImage: "sidebar.left")
             }
         }
+        // Explicitly hide the system toolbar to show only ours
+        .navigationSplitViewStyle(.balanced)
+        .navigationBarHidden(true)
         .sheet(isPresented: $isShowingAddGroup) {
             NewGroupView { newGroup in
-                taskGroups.append(newGroup)
+                profile.groups.append(newGroup)
                 selectedGroup = newGroup
             }
         }
@@ -88,7 +105,7 @@ struct ContentView: View {
     
     func saveData() {
         // Step 1: Convert Array -> JSON Data
-        if let encodedData = try? JSONEncoder().encode(taskGroups) {
+        if let encodedData = try? JSONEncoder().encode(profile.groups) {
             // Step 2: Save the data into UserDefaults
             UserDefaults.standard.set(encodedData, forKey: saveKey)
         }
@@ -99,15 +116,17 @@ struct ContentView: View {
         if let savedData = UserDefaults.standard.data(forKey: saveKey) {
             // Step 2: Try to Decode JSON -> Array for my view
             if let decodedData = try? JSONDecoder().decode([TaskGroup].self, from: savedData) {
-                taskGroups = decodedData
+                profile.groups = decodedData
                 return
             }
         }
         // If no data is found, show the sample/mock data
-        taskGroups = TaskGroup.sample
+        if profile.groups.isEmpty {
+            profile.groups = TaskGroup.sample
+        }
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}
