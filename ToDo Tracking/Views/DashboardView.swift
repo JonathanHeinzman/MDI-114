@@ -45,13 +45,13 @@ struct DashboardView: View {
                                         Text(profile.name)
                                             .font(.system(.headline))
                                             .fontWeight(.bold)
-                                            .foregroundColor(.brown)
+                                            .foregroundColor(.white)
                                     }
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 25)
                                     .background(
                                         RoundedRectangle(cornerRadius: 25)
-                                            .fill(Color.indigo)
+                                            .fill(Color.gray)
                                     )
                                     // UI Profile finishes
                                 }
