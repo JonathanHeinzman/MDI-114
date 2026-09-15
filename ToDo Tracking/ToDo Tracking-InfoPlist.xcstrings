@@ -11,6 +11,12 @@
             "value" : "ToDo Tracking"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguimiento de tareas"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
