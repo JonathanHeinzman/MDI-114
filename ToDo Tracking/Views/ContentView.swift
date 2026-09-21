@@ -25,7 +25,7 @@ struct ContentView: View {
             List(selection: $selectedGroup) {
                 ForEach(profile.groups) { group in
                     NavigationLink(value: group) {
-                        Label(group.title, systemImage: group.symbolName)
+                        Label(LocalizedStringKey(group.title), systemImage: group.symbolName)
                     }
                     .accessibilityIdentifier("group_row_\(group.title)")
                 }
@@ -37,7 +37,7 @@ struct ContentView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Image(systemName: "chevron.left")
+                        Image(systemName: "chevron.backward")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(.blue)
                             .padding(8)

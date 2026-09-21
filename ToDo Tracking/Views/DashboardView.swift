@@ -42,7 +42,7 @@ struct DashboardView: View {
                                                 .clipShape(RoundedRectangle(cornerRadius: 20))
                                         }
                                         .frame(width: 120, height: 120)
-                                        Text(profile.name)
+                                        Text(LocalizedStringKey(profile.name))
                                             .font(.system(.headline))
                                             .fontWeight(.bold)
                                             .foregroundColor(.white)

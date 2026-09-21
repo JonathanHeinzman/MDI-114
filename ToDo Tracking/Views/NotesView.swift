@@ -29,7 +29,7 @@ struct NotesView: View {
                 Button {
                     dismiss()
                 } label: {
-                    Label("Tasks", systemImage: "chevron.left")
+                    Label("Tasks", systemImage: "chevron.backward")
                 }
             }
             
