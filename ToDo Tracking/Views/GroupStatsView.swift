@@ -10,16 +10,16 @@ import SwiftUI
 struct GroupStatsView: View {
     var tasks: [TaskItem]
     
-    // Count the isCompleted total tasks
-    var completedCount: Int {
-        tasks.filter { $0.isCompleted }.count
-    }
-    
-    // Percentage isComplete / Total Tasks
-    var progress: Double {
-        tasks.isEmpty ? 0 : Double(completedCount) / Double(tasks.count)
-    }
-    
+//    // Count the isCompleted total tasks
+//    var completedCount: Int {
+//        tasks.filter { $0.isCompleted }.count
+//    }
+//    
+//    // Percentage isComplete / Total Tasks
+//    var progress: Double {
+//        tasks.isEmpty ? 0 : Double(completedCount) / Double(tasks.count)
+//    }
+//    
     var body: some View {
         HStack {
             // Progress Ring
@@ -30,12 +30,12 @@ struct GroupStatsView: View {
                     .foregroundColor(.green)
         
                 Circle()
-                    .trim(from: 0.0, to: progress)
+                    .trim(from: 0.0, to: tasks.progress)
                     .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round))
                     .foregroundColor(.green)
                     .rotationEffect(.degrees(-90))
                 
-                Text(progress, format: .percent)
+                Text(tasks.progress, format: .percent)
                     .font(.caption)
                     .bold()
             }
@@ -47,7 +47,7 @@ struct GroupStatsView: View {
                 Text("Task Progress")
                     .font(.headline)
                     .foregroundColor(.secondary)
-                Text("\(completedCount) / \(tasks.count) Completed")
+                Text("\(tasks.completedCount) / \(tasks.count) Completed")
                     .font(.title)
                     .bold()
             }

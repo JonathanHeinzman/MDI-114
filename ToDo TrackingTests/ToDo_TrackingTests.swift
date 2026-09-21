@@ -10,10 +10,24 @@ import Testing
 
 struct ToDo_TrackingTests {
 
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
-        // Swift Testing Documentation
-        // https://developer.apple.com/documentation/testing
+    @Test func progressIsZeroWhenThereAreNoTasks() {
+        
+        let tasks: [TaskItem] = []
+        
+        #expect(tasks.progress == 0)
+        #expect(tasks.completedCount == 0)
+        
     }
-
+    
+    @Test func progressReflectsCompletedTasks() {
+        
+        let tasks = [
+            TaskItem(title: "Finish Assignment", isCompleted: false),
+            TaskItem(title: "Study for Test", isCompleted: true)
+            
+        ]
+        
+        #expect(tasks.completedCount == 1)
+        #expect(tasks.progress == 0.5)
+    }
 }

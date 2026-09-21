@@ -25,7 +25,7 @@ struct DashboardView: View {
                             Text("Welcome Back to ToDo App")
                                 .font(.subheadline)
                                 .textCase(.uppercase)
-                                .foregroundColor(.mint)
+                                .foregroundColor(.blue)
                                 .padding(.top, 40)
                             Text("Select your profile")
                                 .font(.caption)
@@ -55,6 +55,7 @@ struct DashboardView: View {
                                     )
                                     // UI Profile finishes
                                 }
+                                .accessibilityIdentifier("profile_card_\(profile.name.lowercased())")
                                 .buttonStyle(PlainButtonStyle())
                             }
                         }

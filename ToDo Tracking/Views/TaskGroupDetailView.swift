@@ -35,11 +35,14 @@ struct TaskGroupDetailView: View {
                     TextField("Task Title", text: $task.title)
                         .strikethrough(task.isCompleted)
                         .foregroundStyle(task.isCompleted ? .gray : .primary)
+                        .accessibilityIdentifier("task_title_field")
                 }
+                .accessibilityIdentifier("task_completed_toggle")
             }
             .onDelete { index in
                 group.tasks.remove(atOffsets: index)
             }
+            .accessibilityIdentifier("delete_task")
         }
         .navigationTitle(group.title)
         .toolbar {
@@ -64,6 +67,7 @@ struct TaskGroupDetailView: View {
                         group.tasks.append(TaskItem(title: ""))
                     }
                 }
+                .accessibilityIdentifier("add_new_task")
             }
         }
     }

@@ -40,6 +40,7 @@ struct NotesView: View {
                 } label: {
                     Image(systemName: "trash")
                 }
+                .accessibilityIdentifier("clear_drawing")
             }
         }
     }

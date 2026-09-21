@@ -52,3 +52,16 @@ extension Profile {
         Profile(name: "Student", profileImage: "student_img", groups: []),
     ]
 }
+
+extension Array where Element == TaskItem {
+    // Count the isCompleted total tasks
+    var completedCount: Int {
+        filter { $0.isCompleted }.count
+    }
+    
+    // Percentage isComplete / Total Tasks
+    var progress: Double {
+        isEmpty ? 0 : Double(completedCount) / Double(count)
+    }
+    
+}

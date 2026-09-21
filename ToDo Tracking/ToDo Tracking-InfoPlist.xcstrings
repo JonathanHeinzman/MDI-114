@@ -5,6 +5,12 @@
       "comment" : "Bundle name",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تتبع المهام"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -21,6 +27,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suivi des tâches"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "מעקב משימות"
           }
         }
       }

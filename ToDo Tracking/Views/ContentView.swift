@@ -27,6 +27,7 @@ struct ContentView: View {
                     NavigationLink(value: group) {
                         Label(group.title, systemImage: group.symbolName)
                     }
+                    .accessibilityIdentifier("group_row_\(group.title)")
                 }
             }
             .navigationTitle(profile.name)
@@ -49,6 +50,7 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
+                    .accessibilityIdentifier("add_group_button")
                 }
             }
             
@@ -63,7 +65,7 @@ struct ContentView: View {
             }
             .foregroundStyle(.primary)
             .padding(.bottom, 20)
-            
+            .accessibilityIdentifier("dark_mode_toggle")
             
             // COLUMN 2
         }
@@ -78,6 +80,7 @@ struct ContentView: View {
                 ContentUnavailableView("Select a Group", systemImage: "sidebar.left")
             }
         }
+        .accessibilityIdentifier("close_open_sidebar")
         // Explicitly hide the system toolbar to show only ours
         .navigationSplitViewStyle(.balanced)
         .navigationBarHidden(true)

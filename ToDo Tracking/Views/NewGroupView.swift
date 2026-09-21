@@ -21,6 +21,7 @@ struct NewGroupView: View {
                 // SECTION 1 : NAME OF THE GROUP
                 Section("Group Name"){
                     TextField("e.g. Work, School, Personal", text: $groupName)
+                        .accessibilityIdentifier("group_name_field")
                 }
                 
                 // SECTION 2 : ICON
@@ -49,6 +50,7 @@ struct NewGroupView: View {
                     Button("Cancel") {
                         dismiss()
                     }
+                    .accessibilityIdentifier("cancel_button")
                 }
                     
                 // item 2 : Right = Save
@@ -58,7 +60,7 @@ struct NewGroupView: View {
                         onSave(newGroup)
                         dismiss()
                     }
-                    
+                    .accessibilityIdentifier("save_button")
                     .disabled(groupName.isEmpty) // disable save button if group name is empty
                 }
             }

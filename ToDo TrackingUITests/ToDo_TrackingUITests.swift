@@ -10,34 +10,37 @@ import XCTest
 final class ToDo_TrackingUITests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testSpanishLocalization() throws {
+        
         let app = XCUIApplication()
+        
+        app.launchArguments += ["-AppleLanguages", "(es)", "-AppleLocale", "es_ES"]
+        
         app.launch()
+        
+        // Home -> Inicio from Localizable.xcstrings
+        XCTAssertTrue(app.navigationBars["Inicio"].waitForExistence(timeout: 2))
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // XCUIAutomation Documentation
-        // https://developer.apple.com/documentation/xcuiautomation
+        app.buttons["profile_card_professor"].tap()
+        app.buttons["add_group_button"].tap()
+        
+        // New group -> Nuevo grupo , Cancel -> Cancelar
+        XCTAssertTrue(app.navigationBars["Nuevo grupo"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.buttons["Cancelar"].exists)
+        
+        // The identifier is stable across languages - same as other test
+        let nameField = app.textFields["group_name_field"]
+        nameField.tap()
+        nameField.typeText("Ejericio")
+        
+        app.buttons["save_button"].tap()
+        
+        XCTAssertTrue(app.staticTexts["Ejericio"].waitForExistence(timeout: 2)) 
+        
     }
-
-    @MainActor
-    func testLaunchPerformance() throws {
-        // This measures how long it takes to launch your application.
-        measure(metrics: [XCTApplicationLaunchMetric()]) {
-            XCUIApplication().launch()
-        }
-    }
+    
 }
